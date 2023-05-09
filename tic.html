@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Tic Tac Toe</h1>
-  <div class="board">
-    <div class="row">
-      <div class="cell" data-row="0" data-col="0"></div>
-      <div class="cell column" data-row="0" data-col="1"></div>
-      <div class="cell column" data-row="0" data-col="2"></div>
+  <head>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Tic Tac Toe</h1>
+      </div>
+      <div class="mode-selection">
+        <p>Select mode:</p>
+        <button id="single-player-btn" class="mode-btn">Single Player</button>
+        <button id="multiplayer-btn" class="mode-btn">Multiplayer</button>
+        <button id="play-btn">Play</button>
+      </div>
+      <div id="board" class="board">
+      </div>
     </div>
-    <div class="row">
-      <div class="cell row" data-row="1" data-col="0"></div>
-      <div class="cell row column" data-row="1" data-col="1"></div>
-      <div class="cell row column" data-row="1" data-col="2"></div>
-    </div>
-    <div class="row">
-      <div class="cell row" data-row="2" data-col="0"></div>
-      <div class="cell row column" data-row="2" data-col="1"></div>
-      <div class="cell row column" data-row="2" data-col="2"></div>
-    </div>
-  </div>
-  <script src="tic-tac-toe.js"></script>
-</body>
+
+    <script src="tic-tac-toe.js"></script>
+  </body>
 </html>

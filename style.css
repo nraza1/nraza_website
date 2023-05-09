@@ -37,83 +37,93 @@ body {
   }
   
   /* Add styles for your tic-tac-toe game here */
-  table {
-    margin: 20px auto;
-    border-collapse: collapse;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
   
-  td {
-    width: 80px;
-    height: 80px;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 36px;
-    font-weight: bold;
-    color: white;
-    background-color: #333;
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  td:hover {
-    background-color: #444;
-  }
-  
-  td:active {
-    background-color: #555;
-  }
-  
-  td:nth-child(3n+1) {
-    border-left: 4px solid white;
-  }
-  
-  td:nth-child(-n+3) {
-    border-top: 4px solid white;
-  }
-  
-  td:nth-child(3n) {
-    border-right: 4px solid white;
-  }
-  
-  td:nth-last-child(-n+3) {
-    border-bottom: 4px solid white;
-  }
   body {
-    font-family: sans-serif;
-    text-align: center;
+    background-color: lightblue;
+    font-family: Arial, sans-serif;
   }
   
-  h1 {
-    margin-top: 20px;
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .header {
+    text-align: center;
     margin-bottom: 20px;
   }
   
   .board {
-    display: inline-block;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
     border: 2px solid black;
-    border-collapse: collapse;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
   }
   
-  .cell {
-    width: 50px;
-    height: 50px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    display: inline-block;
-    vertical-align: middle;
+  .board div {
+    background-color: white;
     text-align: center;
-    font-size: 36px;
-    font-weight: bold;
+    font-size: 5rem;
     cursor: pointer;
   }
   
-  .column {
-    border-left: 2px solid black;
+  .board div:hover {
+    background-color: #f5f5f5;
   }
   
-  .row {
-    border-top: 2px solid black;
+  .board .occupied {
+    cursor: not-allowed;
+    pointer-events: none;
   }
+  
+  .board .vertical {
+    border-right: 2px solid black;
+  }
+  
+  .board .horizontal {
+    border-bottom: 2px solid black;
+  }
+  
+  .mode-selection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .mode-btn {
+    margin: 0 10px;
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .mode-btn.selected {
+    background-color: #ccc;
+  }
+  
+  #play-btn {
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: none;
+    margin-left: 10px;
+  }
+  
   
     
   
