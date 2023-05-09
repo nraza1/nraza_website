@@ -1,76 +1,114 @@
-const cells = document.querySelectorAll('td');
+let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
-let numMoves = 0;
 
-cells.forEach(cell => {
-  cell.addEventListener('click', handleMove);
-});
-
-function handleMove(event) {
-  const cell = event.target;
-  
-  // If the cell is already occupied, do nothing
-  if (cell.textContent !== '') {
-    return;
-  }
-  
-  // Make the move and update the game state
-  cell.textContent = currentPlayer;
-  numMoves++;
-  
-  // Check if the game is over
-  if (checkWin() || numMoves === 9) {
-    endGame();
-    return;
-  }
-  
-  // Switch to the next player
-  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-  
-  // If it's the computer's turn, make a move
-  if (currentPlayer === 'O') {
-    setTimeout(makeComputerMove, 500);
+function drawBoard() {
+  for (let i = 0; i < board.length; i++) {
+    document.getElementById(`cell-${i}`).innerText = board[i];
   }
 }
 
-function checkWin() {
-  const board = Array.from(cells).map(cell => cell.textContent);
-  const winningLines = [
-    // Rows
+function getAvailableMoves() {
+  return board.reduce((moves, cell, index) => {
+    if (cell === '') {
+      moves.push(index);
+    }
+    return moves;
+  }, []);
+}
+
+function checkWin(board, player) {
+  const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
-    // Columns
     [0, 3, 6],
     [1, 4, 7],
     [2, 5, 8],
-    // Diagonals
     [0, 4, 8],
-    [2, 4, 6]
+    [2, 4, 6],
   ];
-  
-  for (let i = 0; i < winningLines.length; i++) {
-    const [a, b, c] = winningLines[i];
-    if (board[a] !== '' && board[a] === board[b] && board[a] === board[c]) {
-      return true;
+
+  return winningCombos.some(combo =>
+    combo.every(cell => board[cell] === player)
+  );
+}
+
+function getComputerMove() {
+  let move;
+
+  // check if the center cell is available
+  if (board[4] === '') {
+    move = 4;
+  } else {
+    // get a list of all available moves
+    const availableMoves = getAvailableMoves();
+
+    // loop through the available moves and choose one that prevents the user from winning
+    for (let i = 0; i < availableMoves.length; i++) {
+      const testBoard = [...board];
+      testBoard[availableMoves[i]] = 'O';
+      if (!checkWin(testBoard, 'X')) {
+        move = availableMoves[i];
+        break;
+      }
+    }
+
+    // if no move was found to prevent user from winning, choose a random available move
+    if (move === undefined) {
+      move = availableMoves[Math.floor(Math.random() * availableMoves.length)];
     }
   }
-  
-  return false;
+
+  return move;
 }
 
-function endGame() {
-  const winner = checkWin() ? currentPlayer : 'Tie';
-  alert(`Game over! ${winner} wins.`);
-  
-  // Clear the board
-  cells.forEach(cell => cell.textContent = '');
+function play(cellIndex) {
+  if (board[cellIndex] !== '') {
+    return;
+  }
+
+  board[cellIndex] = currentPlayer;
+  drawBoard();
+
+  if (checkWin(board, currentPlayer)) {
+    alert(`${currentPlayer} wins!`);
+    reset();
+    return;
+  }
+
+  if (getAvailableMoves().length === 0) {
+    alert('Draw!');
+    reset();
+    return;
+  }
+
+  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+  if (currentPlayer === 'O') {
+    const computerMove = getComputerMove();
+    board[computerMove] = currentPlayer;
+    drawBoard();
+
+    if (checkWin(board, currentPlayer)) {
+      alert(`${currentPlayer} wins!`);
+      reset();
+      return;
+    }
+
+    if (getAvailableMoves().length === 0) {
+      alert('Draw!');
+      reset();
+      return;
+    }
+
+    currentPlayer = 'X';
+  }
+}
+
+function reset() {
+  board = ['', '', '', '', '', '', '', '', ''];
   currentPlayer = 'X';
-  numMoves = 0;
+  drawBoard();
 }
 
-function makeComputerMove() {
-  const availableCells = Array.from(cells).filter(cell => cell.textContent === '');
-  const randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
-  randomCell.click();
-}
+drawBoard();
