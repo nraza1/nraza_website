@@ -78,5 +78,42 @@ body {
   td:nth-last-child(-n+3) {
     border-bottom: 4px solid white;
   }
+  body {
+    font-family: sans-serif;
+    text-align: center;
+  }
   
+  h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .board {
+    display: inline-block;
+    border: 2px solid black;
+    border-collapse: collapse;
+  }
+  
+  .cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .column {
+    border-left: 2px solid black;
+  }
+  
+  .row {
+    border-top: 2px solid black;
+  }
+  
+    
   
