@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#">Tic-Tac-Toe</a>
+    <!-- Add links to your other project pages here -->
+  </nav>
+  <div class="container">
+    <h1>Tic-Tac-Toe</h1>
+    <table>
+      <tr>
+        <td id="0"></td>
+        <td id="1"></td>
+        <td id="2"></td>
+      </tr>
+      <tr>
+        <td id="3"></td>
+        <td id="4"></td>
+        <td id="5"></td>
+      </tr>
+      <tr>
+        <td id="6"></td>
+        <td id="7"></td>
+        <td id="8"></td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    const squares = document.querySelectorAll('td');
+    let turn = 'X';
+
+    squares.forEach(square => {
+      square.addEventListener('click', () => {
+        if (!square.textContent) {
+          square.textContent = turn;
+          turn = turn === 'X' ? 'O' : 'X';
+          checkDraw();
+        }
+      });
+    });
+
+    function checkDraw() {
+      let count = 0;
+      squares.forEach(square => {
+        if (square.textContent) {
+          count++;
+        }
+      });
+      if (count === 9) {
+        alert('Draw!');
+        squares.forEach(square => {
+          square.textContent = '';
+        });
+        turn = 'X';
+      }
+    }
+  </script>
+</body>
+</html>
