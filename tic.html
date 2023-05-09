@@ -31,35 +31,6 @@
       </tr>
     </table>
   </div>
-  <script>
-    const squares = document.querySelectorAll('td');
-    let turn = 'X';
-
-    squares.forEach(square => {
-      square.addEventListener('click', () => {
-        if (!square.textContent) {
-          square.textContent = turn;
-          turn = turn === 'X' ? 'O' : 'X';
-          checkDraw();
-        }
-      });
-    });
-
-    function checkDraw() {
-      let count = 0;
-      squares.forEach(square => {
-        if (square.textContent) {
-          count++;
-        }
-      });
-      if (count === 9) {
-        alert('Draw!');
-        squares.forEach(square => {
-          square.textContent = '';
-        });
-        turn = 'X';
-      }
-    }
-  </script>
+  <script src="tic-tac-toe.js"></script>
 </body>
 </html>

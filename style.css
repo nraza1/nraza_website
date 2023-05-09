@@ -37,4 +37,46 @@ body {
   }
   
   /* Add styles for your tic-tac-toe game here */
+  table {
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+  
+  td {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    background-color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  td:hover {
+    background-color: #444;
+  }
+  
+  td:active {
+    background-color: #555;
+  }
+  
+  td:nth-child(3n+1) {
+    border-left: 4px solid white;
+  }
+  
+  td:nth-child(-n+3) {
+    border-top: 4px solid white;
+  }
+  
+  td:nth-child(3n) {
+    border-right: 4px solid white;
+  }
+  
+  td:nth-last-child(-n+3) {
+    border-bottom: 4px solid white;
+  }
+  
   
