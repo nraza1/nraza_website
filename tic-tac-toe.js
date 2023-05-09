@@ -1,107 +1,161 @@
-const playerOne = 'X';
-const playerTwo = 'O';
+// Define variables for game settings
+let isSinglePlayer = true;
+let isGameActive = false;
 
-let currentPlayer = playerOne;
+// Define variables for game state
+let currentPlayer = 'X';
+let gameBoard = ['', '', '', '', '', '', '', '', ''];
 
-let gameType;
+// Define variables for DOM elements
+const gameBoardElement = document.querySelector('#game-board');
+const singlePlayerButton = document.querySelector('#singlePlayer');
+const multiPlayerButton = document.querySelector('#multiPlayer');
+const playButton = document.querySelector('#play');
+const newGameButton = document.querySelector('#newGame');
 
-let gameOver = false;
+// Define function to render the game board
+function renderGameBoard() {
+  let boardHTML = '';
+  for (let i = 0; i < gameBoard.length; i++) {
+    const tile = gameBoard[i];
+    const tileHTML = `<div class="tile" data-index="${i}">${tile}</div>`;
+    boardHTML += tileHTML;
+  }
+  gameBoardElement.innerHTML = boardHTML;
+}
 
-let board = ['', '', '', '', '', '', '', '', ''];
-
-const winningCombinations = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-];
-
-const cells = document.querySelectorAll('.cell');
-
-document.querySelector('#singlePlayer').addEventListener('click', function() {
-  gameType = 'single';
-  document.querySelector('#singlePlayer').classList.add('selected');
-  document.querySelector('#multiplayer').classList.remove('selected');
-});
-
-document.querySelector('#multiplayer').addEventListener('click', function() {
-  gameType = 'multi';
-  document.querySelector('#multiplayer').classList.add('selected');
-  document.querySelector('#singlePlayer').classList.remove('selected');
-});
-
-function handleCellClick(e) {
-  const index = parseInt(e.target.getAttribute('data-index'));
-
-  if (board[index] === '' && !gameOver) {
-    board[index] = currentPlayer;
-    e.target.textContent = currentPlayer;
-    checkForWin();
-    switchPlayers();
-    if (gameType === 'single' && !gameOver) {
-      computerTurn();
+// Define function to handle tile click events
+function handleTileClick(event) {
+  const tileIndex = event.target.dataset.index;
+  if (gameBoard[tileIndex] === '' && isGameActive) {
+    gameBoard[tileIndex] = currentPlayer;
+    renderGameBoard();
+    checkGameStatus();
+    if (isSinglePlayer && isGameActive) {
+      computerMove();
+    } else {
+      toggleCurrentPlayer();
     }
   }
 }
 
-function checkForWin() {
-  for (let i = 0; i < winningCombinations.length; i++) {
-    const [a, b, c] = winningCombinations[i];
-    if (board[a] && board[a] === board[b] && board[b] === board[c]) {
-      gameOver = true;
-      const winner = board[a];
-      displayGameOver(`${winner} wins!`);
+// Define function to handle computer move
+function computerMove() {
+  let randomIndex;
+  do {
+    randomIndex = Math.floor(Math.random() * gameBoard.length);
+  } while (gameBoard[randomIndex] !== '');
+  gameBoard[randomIndex] = 'O';
+  renderGameBoard();
+  checkGameStatus();
+  toggleCurrentPlayer();
+}
+
+// Define function to toggle current player
+function toggleCurrentPlayer() {
+  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+}
+
+// Define function to check game status
+function checkGameStatus() {
+  const winningConditions = [    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < winningConditions.length; i++) {
+    const [a, b, c] = winningConditions[i];
+    if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+      isGameActive = false;
+      showWinningAnimation(winningConditions[i]);
+      return;
     }
   }
-  if (!board.includes('') && !gameOver) {
-    gameOver = true;
-    displayGameOver('Draw!');
+
+  if (!gameBoard.includes('')) {
+    isGameActive = false;
+    showDrawAnimation();
   }
 }
 
-function computerTurn() {
-  const availableCells = getAvailableCells();
-  const randomIndex = Math.floor(Math.random() * availableCells.length);
-  const randomCell = availableCells[randomIndex];
-  board[randomCell] = playerTwo;
-  cells[randomCell].textContent = playerTwo;
-  checkForWin();
-  switchPlayers();
+// Define function to show winning animation
+function showWinningAnimation(winningTilesIndices) {
+  const winningTiles = getWinningTiles(winningTilesIndices);
+  for (let i = 0; i < winningTiles.length; i++) {
+    const tile = winningTiles[i];
+    tile.classList.add('winning-tile');
+  }
 }
 
-function getAvailableCells() {
-  const availableCells = [];
-  for (let i = 0; i < board.length; i++) {
-    if (board[i] === '') {
-      availableCells.push(i);
+// Define function to show draw animation
+function showDrawAnimation() {
+  gameBoardElement.classList.add('draw');
+}
+
+// Define function to get the winning tiles
+function getWinningTiles(winningTilesIndices) {
+    const winningTiles = [];
+    for (let i = 0; i < winningTilesIndices.length; i++) {
+      const index = winningTilesIndices[i];
+      const tile = gameBoardElement.querySelector(`[data-index="${index}"]`);
+      winningTiles.push(tile);
     }
+    return winningTiles;
   }
-  return availableCells;
-}
+  
+  // Define function to handle single player button click
+  function handleSinglePlayerClick() {
+    isSinglePlayer = true;
+    renderGameBoard();
+    toggleGameSettings();
+  }
+  
+  // Define function to handle multi player button click
+  function handleMultiPlayerClick() {
+    isSinglePlayer = false;
+    renderGameBoard();
+    toggleGameSettings();
+  }
+  
+  // Define function to handle play button click
+  function handlePlayClick() {
+    isGameActive = true;
+    renderGameBoard();
+    toggleGameSettings();
+  }
+  
+  // Define function to handle new game button click
+  function handleNewGameClick() {
+    currentPlayer = 'X';
+    gameBoard = ['', '', '', '', '', '', '', '', ''];
+    isGameActive = false;
+    gameBoardElement.classList.remove('draw');
+    const winningTiles = gameBoardElement.querySelectorAll('.winning-tile');
+    for (let i = 0; i < winningTiles.length; i++) {
+      const tile = winningTiles[i];
+      tile.classList.remove('winning-tile');
+    }
+    renderGameBoard();
+    toggleGameSettings();
+  }
+  
+  // Define function to toggle game settings
+  function toggleGameSettings() {
+    singlePlayerButton.disabled = isGameActive;
+    multiPlayerButton.disabled = isGameActive;
+    playButton.disabled = isGameActive || gameBoard.includes('');
+    newGameButton.disabled = !isGameActive;
+  }
 
-function switchPlayers() {
-  currentPlayer = currentPlayer === playerOne ? playerTwo : playerOne;
-}
+singlePlayerButton.addEventListener('click', handleSinglePlayerClick);
+multiPlayerButton.addEventListener('click', handleMultiPlayerClick);
+playButton.addEventListener('click', handlePlayClick);
+newGameButton.addEventListener('click', handleNewGameClick);
 
-function displayGameOver(message) {
-  const gameover = document.querySelector('.gameover');
-  gameover.style.display = 'block';
-  const text = gameover.querySelector('.text');
-  text.textContent = message;
-}
+renderGameBoard();
 
-function handleRestartClick() {
-  board = ['', '', '', '', '', '', '', '', ''];
-  currentPlayer = playerOne;
-  gameOver = false;
-  cells.forEach(cell => cell.textContent = '');
-  document.querySelector('.gameover').style.display = 'none';
-}
-
-cells.forEach(cell => cell.addEventListener('click', handleCellClick));
-
-document.querySelector('.restart').addEventListener('click', handleRestartClick);
