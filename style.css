@@ -1,0 +1,40 @@
+/* Add your styles here */
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-top: 50px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  nav {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 960px;
+    padding: 0 20px;
+  }
+  
+  /* Add styles for your tic-tac-toe game here */
+  
