@@ -1,129 +1,298 @@
-/* Add your styles here */
-
-body {
-    background-color: #f8f8f8;
-    color: #333;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
+/* Reset some default styles */
+html, body, h1, h2, h3, p, ul, li {
     margin: 0;
     padding: 0;
+    list-style: none;
   }
   
-  h1 {
-    font-size: 36px;
-    margin-top: 50px;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  
-  nav {
+  body {
+    /* background-image: url('https://media.giphy.com/media/wshaU8JlYmTio/giphy.gif'); */
+    background-size: cover;
+    
+    
+    
+    height: 350vh;
+    padding:0;
+    margin:0;
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 1.6;
     background-color: #333;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
+    color: white;
+  }
+
+  /*.scroll-content {
+    opacity: 0;
+    transform: translateY(100px);
+    animation: scroll-animation 1s forwards;
+  }*/
+  /*
+  @keyframes scroll-animation {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }*/
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
     padding: 20px;
   }
   
-  nav a {
+  header {
+    /* background-color: #333; */
+    color: #fff;
+    padding: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+  }
+
+  .header-menu {
+    display: flex;
+    list-style: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  
+  .header-menu li {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Optional: Add spacing between menu items */
+  }
+  
+  .header-menu li img {
+    margin-right: 5px; /* Optional: Add spacing between image and text */
+  }
+  
+  .header-left {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .header-icons {
+    width: 30px;
+    border-radius: 50%;
+  }
+  
+  #home {
+    margin-bottom: 120px;
+    margin-top: 80px;
+  }
+  .icon-img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+  
+  nav ul {
+    display: flex;
+  }
+  
+  nav ul li {
+    margin-right: 10px;
+  }
+  
+  nav ul li a {
     color: #fff;
     text-decoration: none;
   }
   
-  .container {
-    margin: 0 auto;
-    max-width: 960px;
-    padding: 0 20px;
+  section {
+    padding: 40px 0;
   }
   
-  /* Add styles for your tic-tac-toe game here */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .header {
-    text-align: center;
+  section h2 {
+    font-size: 24px;
     margin-bottom: 20px;
   }
   
-  .board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 5px;
-    border: 2px solid black;
-    padding: 10px;
-    justify-content: center;
+  section p {
+    margin-bottom: 20px;
+  }
+  
+  .profile-img {
+    max-width: 300px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 20px;
+  }
+
+  .hello {
+    font-size: 50px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  }
+
+  .bio {
+    font-size: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: normal;
+    font-stretch: expanded;
+    width:fit-content;
+  }
+  .about_header {
+    font-size: 40px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  }
+
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+  }
+  
+  .bullet-list li {
+    margin-bottom: 10px;
+  }
+  
+  .bullet-content {
+    display: flex;
     align-items: center;
   }
   
-  .board div {
-    background-color: white;
-    text-align: center;
-    font-size: 5rem;
-    cursor: pointer;
-  }
+  /*.bullet-content img {
+    margin-right: 10px;
+    width: 40px;
+    height: 
+  }*/
   
-  .board div:hover {
-    background-color: #f5f5f5;
+  .bullet-content .bullet-text {
+    color: white;
+    margin-right: 10px;
   }
-  
-  .board .occupied {
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-  
-  .board .vertical {
-    border-right: 2px solid black;
-  }
-  
-  .board .horizontal {
-    border-bottom: 2px solid black;
-  }
-  
-  .mode-selection {
+
+  .bullet-text {
     display: flex;
-    justify-content: center;
+    align-items: center;
+  }
+  
+  .bullet-text .emoji {
+    font-size: 36px; /* Adjust the font size of the emoji */
+    margin-left: 5px; /* Optional: Add some spacing between the emoji and text */
+  }
+
+  .sub-bullet-text .emoji {
+    font-size: 36px;
+    margin-left: 5px; 
+  }
+  
+  .sub-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+  }
+  
+  .sub-bullet-list li {
+    margin-bottom: 5px;
+  }
+  
+  .sub-bullet-list .bullet-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sub-bullet-list .bullet-content img {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sub-bullet-list .bullet-content .sub-bullet-text {
+    color: white;
+    margin-right: 10px;
+  }
+
+  .sub-bullet-list {
+    margin-left: 60px;
+  }
+  .student-img {
+    width: 40px;
+    height: 40px;
+  }
+  .diploma-img {
+    width: 60px;
+    height: 40px;
+  }
+  .cs-img {
+    width: 80px;
+  }
+  .business-img {
+    width: 80px;
+  }
+  .quant-img {
+    width: 40px;
+    height: 40px;
+  }
+  .bullet_arrow {
+    width: 80px;
+    height: 45px;
+    margin-right: 10px;
+  }
+  
+  .project {
+    margin-bottom: 20px;
+  }
+
+  .proj_header {
+    font-size: 40px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  
+  .project img {
+    max-width: 200px;
+    border-radius: 5px;
+  }
+
+  .contact_header {
+    font-size: 40px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  
+  .contact-info {
+    display: flex;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .mode-btn {
-    margin: 0 10px;
-    background-color: #f5f5f5;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1rem;
+  .contact-info img {
+    width: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+
+  .contact-info p {
+    margin: 0;
+    display: flex;
+    align-items: center;
   }
   
-  .mode-btn.selected {
-    background-color: #ccc;
+  .contact-info a {
+    display: inline-block;
+    vertical-align: middle;
   }
   
-  #play-btn {
-    background-color: #f5f5f5;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    display: none;
-    margin-left: 10px;
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
   }
   
+  footer p {
+    margin-bottom: 10px;
+  }
   
-    
+  footer a {
+    color: #fff;
+    text-decoration: underline;
+  }
   
